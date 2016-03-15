@@ -77,36 +77,20 @@
 
 
 -(void) backprop{
-    NSLog(@"backprop for %@", self);
     CGFloat dErrTotaldOut = 0;
     for (int i=0; i<[outputNeurons count]; i++) {
         Neuron* outNeuron = outputNeurons[i];
         CGFloat deltaOutput = [outNeuron deltaNode];
-        NSLog(@" calc dErrOutdOut for %@", outNeuron);
-
-        NSLog(@"  delta node: %f", deltaOutput);
-
         CGFloat outWeight = [outNeuron weightForNeuron:self];
-
-        NSLog(@"  weight: %f", outWeight);
-
         CGFloat dErrOutdOut = (deltaOutput * outWeight);
-
-        NSLog(@"  dErrOutdOut: %f", dErrOutdOut);
 
         dErrTotaldOut += dErrOutdOut;
     }
-
-    NSLog(@" dErrTotaldOut: %f", dErrTotaldOut);
-
     [self backpropGivendErrTotaldOut:dErrTotaldOut];
 }
 
 
 -(void) backpropGivenOutput:(CGFloat)targetVal{
-
-    NSLog(@"backpropGivenOutput for %@ with %f vs %f", self, targetVal, [self latestOutput]);
-
     CGFloat dErrTotaldOut = ([self latestOutput] - targetVal);
 
     [self backpropGivendErrTotaldOut:dErrTotaldOut];
@@ -114,12 +98,7 @@
 
 
 -(void) backpropGivendErrTotaldOut:(CGFloat)dTotaldOut{
-
-    NSLog(@" error total: %f", dTotaldOut);
-
     CGFloat dOutdNet = [self latestOutput] * (1 - [self latestOutput]);
-
-    NSLog(@" error dnet: %f", dOutdNet);
 
     deltaNode = dTotaldOut * dOutdNet;
 
@@ -127,14 +106,7 @@
 
     for (int i=0; i<[weights count]; i++) {
         CGFloat dNetdInput = [inputLatestValues[i] floatValue];
-
-
-        NSLog(@"  dnetdinput %i: %f", i, dNetdInput);
-
         CGFloat dTotaldinput = deltaNode * dNetdInput;
-
-        NSLog(@"  dTotaldinput %i: %f", i, dTotaldinput);
-
         CGFloat weight = [weights[i] floatValue];
 
         updatedWeights = [updatedWeights arrayByAddingObject:@(weight - [Neuron learningRate] *dTotaldinput)];

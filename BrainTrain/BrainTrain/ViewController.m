@@ -70,46 +70,35 @@
     CGFloat o1Target = .01;
     CGFloat o2Target = .99;
 
-    [h1 forwardPass];
-    [h2 forwardPass];
 
-    NSLog(@"h1: %f", [h1 latestOutput]);
-    NSLog(@"h2: %f", [h2 latestOutput]);
+    for (int i=0; i<10000; i++) {
+        NSLog(@"run %i", i + 1);
+        [h1 forwardPass];
+        [h2 forwardPass];
+        [o1 forwardPass];
+        [o2 forwardPass];
 
-    [o1 forwardPass];
-    [o2 forwardPass];
+        NSLog(@"  o1: %f", [o1 latestOutput]);
+        NSLog(@"  o2: %f", [o2 latestOutput]);
 
-    NSLog(@"o1: %f", [o1 latestOutput]);
-    NSLog(@"o2: %f", [o2 latestOutput]);
+        CGFloat e1 = [o1 errorGivenTarget:o1Target];
+        CGFloat e2 = [o2 errorGivenTarget:o2Target];
 
-    CGFloat e1 = [o1 errorGivenTarget:o1Target];
-    CGFloat e2 = [o2 errorGivenTarget:o2Target];
+        NSLog(@"  e1: %f", e1);
+        NSLog(@"  e2: %f", e2);
 
-    NSLog(@"e1: %f", e1);
-    NSLog(@"e2: %f", e2);
+        CGFloat errorTotal = e1 + e2;
 
-    CGFloat errorTotal = e1 + e2;
-
-    NSLog(@"e total: %f", errorTotal);
-
-
-    [o1 backpropGivenOutput:o1Target];
-    [o2 backpropGivenOutput:o2Target];
+        NSLog(@"  e total: %f", errorTotal);
 
 
-    NSLog(@"weights after backprop");
-    NSLog(@"%@", [[o1 weights] arrayByAddingObjectsFromArray:[o2 weights]]);
+        [o1 backpropGivenOutput:o1Target];
+        [o2 backpropGivenOutput:o2Target];
+        [h1 backprop];
+        [h2 backprop];
+    }
 
-
-    [h1 backprop];
-    [h2 backprop];
-
-    NSLog(@"weights after backprop");
-    NSLog(@"%@", [[h1 weights] arrayByAddingObjectsFromArray:[h2 weights]]);
-
-
-
-
+    NSLog(@"asdf");
 }
 
 @end
