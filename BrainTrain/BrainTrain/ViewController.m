@@ -40,8 +40,8 @@
     i2 = [[StaticNeuron alloc] initWithValue:.1];
 
     // hidden
-    h1 = [[Neuron alloc] init];
-    h2 = [[Neuron alloc] init];
+    h1 = [[Neuron alloc] initWithName:@"h1"];
+    h2 = [[Neuron alloc] initWithName:@"h2"];
 
     [h1 addInput:i1 withWeight:.15];
     [h1 addInput:i2 withWeight:.2];
@@ -52,8 +52,8 @@
     [h2 setBias:b1];
 
     // output
-    o1 = [[Neuron alloc] init];
-    o2 = [[Neuron alloc] init];
+    o1 = [[Neuron alloc] initWithName:@"o1"];
+    o2 = [[Neuron alloc] initWithName:@"o2"];
 
     [o1 addInput:h1 withWeight:.4];
     [o1 addInput:h2 withWeight:.45];
@@ -93,13 +93,19 @@
     NSLog(@"e total: %f", errorTotal);
 
 
-    [o1 backpropGivenTarget:o1Target];
-    [o2 backpropGivenTarget:o2Target];
+    [o1 backpropGivenOutput:o1Target];
+    [o2 backpropGivenOutput:o2Target];
 
 
     NSLog(@"weights after backprop");
     NSLog(@"%@", [[o1 weights] arrayByAddingObjectsFromArray:[o2 weights]]);
 
+
+    [h1 backprop];
+    [h2 backprop];
+
+    NSLog(@"weights after backprop");
+    NSLog(@"%@", [[h1 weights] arrayByAddingObjectsFromArray:[h2 weights]]);
 
 
 

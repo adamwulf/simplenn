@@ -13,6 +13,12 @@
 
 @property (nonatomic, strong) Neuron* bias;
 @property (nonatomic, readonly) NSArray* weights;
+@property (nonatomic, readonly) CGFloat deltaNode;
+@property (nonatomic, readonly) NSString* name;
+
+-(instancetype) init NS_UNAVAILABLE;
+
+-(instancetype) initWithName:(NSString*)n;
 
 -(void) addInput:(Neuron*)neuron;
 
@@ -24,6 +30,7 @@
 
 -(CGFloat) errorGivenTarget:(CGFloat)targetVal;
 
--(void) backpropGivenTarget:(CGFloat)targetVal;
+-(void) backprop;
+-(void) backpropGivenOutput:(CGFloat)targetVal;
 
 @end

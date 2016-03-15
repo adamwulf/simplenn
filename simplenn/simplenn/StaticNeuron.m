@@ -13,7 +13,7 @@
 }
 
 -(instancetype) initWithValue:(CGFloat)val{
-    if(self = [super init]){
+    if(self = [super initWithName:[NSString stringWithFormat:@"%.2f", val]]){
         value = val;
     }
     return self;
