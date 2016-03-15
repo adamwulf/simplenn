@@ -1,0 +1,17 @@
+Project/build
+Saved App Data
+LooseLeaf.xcworkspace/xcshareddata/
+LooseLeaf.xcworkspace/xcuserdata/
+Project/LooseLeaf.xcodeproj/xcuserdata
+Project/LooseLeaf.xcodeproj/xcuserdata/developer.xcuserdatad/
+Project/LooseLeaf.xcodeproj/xcuserdata/adam.xcuserdatad
+TestData
+Project/LooseLeaf/Settings.bundle/en.lproj/Acknowledgements.strings
+Project/LooseLeaf/Settings.bundle/Acknowledgements.plist
+*adam.*
+*xcuserdata*
+*.xccheckout
+.DS_Store
+Icons/.DS_Store
+DerivedData
+Paper Stack/DerivedData/

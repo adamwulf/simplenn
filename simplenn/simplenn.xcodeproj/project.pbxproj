@@ -7,17 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C5CEDBF31C97C8AA00467231 /* simple-nn.h in Headers */ = {isa = PBXBuildFile; fileRef = C5CEDBF21C97C8AA00467231 /* simple-nn.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C5CEDC4F1C97CB0E00467231 /* simplenn.h in Headers */ = {isa = PBXBuildFile; fileRef = C5CEDC4E1C97CB0E00467231 /* simplenn.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C5CEDC581C97CB2F00467231 /* Neuron.h in Headers */ = {isa = PBXBuildFile; fileRef = C5CEDC561C97CB2F00467231 /* Neuron.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C5CEDC591C97CB2F00467231 /* Neuron.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEDC571C97CB2F00467231 /* Neuron.m */; };
+		C5CEDC5D1C97CCAD00467231 /* StaticNeuron.h in Headers */ = {isa = PBXBuildFile; fileRef = C5CEDC5B1C97CCAD00467231 /* StaticNeuron.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C5CEDC5E1C97CCAD00467231 /* StaticNeuron.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEDC5C1C97CCAD00467231 /* StaticNeuron.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C5CEDBEF1C97C8AA00467231 /* simple-nn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "simple-nn.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C5CEDBF21C97C8AA00467231 /* simple-nn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "simple-nn.h"; sourceTree = "<group>"; };
-		C5CEDBF41C97C8AA00467231 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5CEDC4B1C97CB0E00467231 /* simplenn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = simplenn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5CEDC4E1C97CB0E00467231 /* simplenn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = simplenn.h; sourceTree = "<group>"; };
+		C5CEDC501C97CB0E00467231 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5CEDC561C97CB2F00467231 /* Neuron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Neuron.h; sourceTree = "<group>"; };
+		C5CEDC571C97CB2F00467231 /* Neuron.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Neuron.m; sourceTree = "<group>"; };
+		C5CEDC5B1C97CCAD00467231 /* StaticNeuron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticNeuron.h; sourceTree = "<group>"; };
+		C5CEDC5C1C97CCAD00467231 /* StaticNeuron.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticNeuron.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C5CEDBEB1C97C8AA00467231 /* Frameworks */ = {
+		C5CEDC471C97CB0E00467231 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -27,96 +35,110 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C5CEDBE51C97C8AA00467231 = {
+		C5CEDC411C97CB0E00467231 = {
 			isa = PBXGroup;
 			children = (
-				C5CEDBF11C97C8AA00467231 /* simple-nn */,
-				C5CEDBF01C97C8AA00467231 /* Products */,
+				C5CEDC4D1C97CB0E00467231 /* simplenn */,
+				C5CEDC4C1C97CB0E00467231 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		C5CEDBF01C97C8AA00467231 /* Products */ = {
+		C5CEDC4C1C97CB0E00467231 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C5CEDBEF1C97C8AA00467231 /* simple-nn.framework */,
+				C5CEDC4B1C97CB0E00467231 /* simplenn.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C5CEDBF11C97C8AA00467231 /* simple-nn */ = {
+		C5CEDC4D1C97CB0E00467231 /* simplenn */ = {
 			isa = PBXGroup;
 			children = (
-				C5CEDBF21C97C8AA00467231 /* simple-nn.h */,
-				C5CEDBF41C97C8AA00467231 /* Info.plist */,
+				C5CEDC5A1C97CB3400467231 /* Neurons */,
+				C5CEDC4E1C97CB0E00467231 /* simplenn.h */,
+				C5CEDC501C97CB0E00467231 /* Info.plist */,
 			);
-			path = "simple-nn";
+			path = simplenn;
+			sourceTree = "<group>";
+		};
+		C5CEDC5A1C97CB3400467231 /* Neurons */ = {
+			isa = PBXGroup;
+			children = (
+				C5CEDC561C97CB2F00467231 /* Neuron.h */,
+				C5CEDC571C97CB2F00467231 /* Neuron.m */,
+				C5CEDC5B1C97CCAD00467231 /* StaticNeuron.h */,
+				C5CEDC5C1C97CCAD00467231 /* StaticNeuron.m */,
+			);
+			name = Neurons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		C5CEDBEC1C97C8AA00467231 /* Headers */ = {
+		C5CEDC481C97CB0E00467231 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5CEDBF31C97C8AA00467231 /* simple-nn.h in Headers */,
+				C5CEDC5D1C97CCAD00467231 /* StaticNeuron.h in Headers */,
+				C5CEDC4F1C97CB0E00467231 /* simplenn.h in Headers */,
+				C5CEDC581C97CB2F00467231 /* Neuron.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		C5CEDBEE1C97C8AA00467231 /* simple-nn */ = {
+		C5CEDC4A1C97CB0E00467231 /* simplenn */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C5CEDBF71C97C8AA00467231 /* Build configuration list for PBXNativeTarget "simple-nn" */;
+			buildConfigurationList = C5CEDC531C97CB0E00467231 /* Build configuration list for PBXNativeTarget "simplenn" */;
 			buildPhases = (
-				C5CEDBEA1C97C8AA00467231 /* Sources */,
-				C5CEDBEB1C97C8AA00467231 /* Frameworks */,
-				C5CEDBEC1C97C8AA00467231 /* Headers */,
-				C5CEDBED1C97C8AA00467231 /* Resources */,
+				C5CEDC461C97CB0E00467231 /* Sources */,
+				C5CEDC471C97CB0E00467231 /* Frameworks */,
+				C5CEDC481C97CB0E00467231 /* Headers */,
+				C5CEDC491C97CB0E00467231 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "simple-nn";
-			productName = "simple-nn";
-			productReference = C5CEDBEF1C97C8AA00467231 /* simple-nn.framework */;
+			name = simplenn;
+			productName = simplenn;
+			productReference = C5CEDC4B1C97CB0E00467231 /* simplenn.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		C5CEDBE61C97C8AA00467231 /* Project object */ = {
+		C5CEDC421C97CB0E00467231 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Milestone Made";
 				TargetAttributes = {
-					C5CEDBEE1C97C8AA00467231 = {
+					C5CEDC4A1C97CB0E00467231 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
 				};
 			};
-			buildConfigurationList = C5CEDBE91C97C8AA00467231 /* Build configuration list for PBXProject "simple-nn" */;
+			buildConfigurationList = C5CEDC451C97CB0E00467231 /* Build configuration list for PBXProject "simplenn" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = C5CEDBE51C97C8AA00467231;
-			productRefGroup = C5CEDBF01C97C8AA00467231 /* Products */;
+			mainGroup = C5CEDC411C97CB0E00467231;
+			productRefGroup = C5CEDC4C1C97CB0E00467231 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C5CEDBEE1C97C8AA00467231 /* simple-nn */,
+				C5CEDC4A1C97CB0E00467231 /* simplenn */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C5CEDBED1C97C8AA00467231 /* Resources */ = {
+		C5CEDC491C97CB0E00467231 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -126,17 +148,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C5CEDBEA1C97C8AA00467231 /* Sources */ = {
+		C5CEDC461C97CB0E00467231 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5CEDC5E1C97CCAD00467231 /* StaticNeuron.m in Sources */,
+				C5CEDC591C97CB2F00467231 /* Neuron.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		C5CEDBF51C97C8AA00467231 /* Debug */ = {
+		C5CEDC511C97CB0E00467231 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -183,7 +207,7 @@
 			};
 			name = Debug;
 		};
-		C5CEDBF61C97C8AA00467231 /* Release */ = {
+		C5CEDC521C97CB0E00467231 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -224,33 +248,33 @@
 			};
 			name = Release;
 		};
-		C5CEDBF81C97C8AA00467231 /* Debug */ = {
+		C5CEDC541C97CB0E00467231 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "simple-nn/Info.plist";
+				INFOPLIST_FILE = simplenn/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.milestonemade.simple-nn";
+				PRODUCT_BUNDLE_IDENTIFIER = com.milestonemade.simplenn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		C5CEDBF91C97C8AA00467231 /* Release */ = {
+		C5CEDC551C97CB0E00467231 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "simple-nn/Info.plist";
+				INFOPLIST_FILE = simplenn/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.milestonemade.simple-nn";
+				PRODUCT_BUNDLE_IDENTIFIER = com.milestonemade.simplenn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -259,24 +283,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C5CEDBE91C97C8AA00467231 /* Build configuration list for PBXProject "simple-nn" */ = {
+		C5CEDC451C97CB0E00467231 /* Build configuration list for PBXProject "simplenn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C5CEDBF51C97C8AA00467231 /* Debug */,
-				C5CEDBF61C97C8AA00467231 /* Release */,
+				C5CEDC511C97CB0E00467231 /* Debug */,
+				C5CEDC521C97CB0E00467231 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C5CEDBF71C97C8AA00467231 /* Build configuration list for PBXNativeTarget "simple-nn" */ = {
+		C5CEDC531C97CB0E00467231 /* Build configuration list for PBXNativeTarget "simplenn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C5CEDBF81C97C8AA00467231 /* Debug */,
-				C5CEDBF91C97C8AA00467231 /* Release */,
+				C5CEDC541C97CB0E00467231 /* Debug */,
+				C5CEDC551C97CB0E00467231 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = C5CEDBE61C97C8AA00467231 /* Project object */;
+	rootObject = C5CEDC421C97CB0E00467231 /* Project object */;
 }
