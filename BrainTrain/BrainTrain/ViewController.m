@@ -62,13 +62,48 @@
     [o2 addInput:h2 withWeight:.55];
 
     [o1 setBias:b2];
-    [o1 setBias:b2];
+    [o2 setBias:b2];
 }
 
 -(void) viewDidAppear:(BOOL)animated{
-    [h1 forwardPass];
 
-    NSLog(@"value: %f", [h1 latestOutput]);
+    CGFloat o1Target = .01;
+    CGFloat o2Target = .99;
+
+    [h1 forwardPass];
+    [h2 forwardPass];
+
+    NSLog(@"h1: %f", [h1 latestOutput]);
+    NSLog(@"h2: %f", [h2 latestOutput]);
+
+    [o1 forwardPass];
+    [o2 forwardPass];
+
+    NSLog(@"o1: %f", [o1 latestOutput]);
+    NSLog(@"o2: %f", [o2 latestOutput]);
+
+    CGFloat e1 = [o1 errorGivenTarget:o1Target];
+    CGFloat e2 = [o2 errorGivenTarget:o2Target];
+
+    NSLog(@"e1: %f", e1);
+    NSLog(@"e2: %f", e2);
+
+    CGFloat errorTotal = e1 + e2;
+
+    NSLog(@"e total: %f", errorTotal);
+
+
+    [o1 backpropGivenTarget:o1Target];
+    [o2 backpropGivenTarget:o2Target];
+
+
+    NSLog(@"weights after backprop");
+    NSLog(@"%@", [[o1 weights] arrayByAddingObjectsFromArray:[o2 weights]]);
+
+
+
+
+
 }
 
 @end
