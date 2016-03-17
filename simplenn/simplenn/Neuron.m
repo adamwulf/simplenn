@@ -66,6 +66,10 @@
     return [self weightForInputNeuron:neuron givenWeights:weights];
 }
 
+-(CGFloat) previousWeightForInputNeuron:(Neuron*)neuron{
+    return [self weightForInputNeuron:neuron givenWeights:oldWeights];
+}
+
 #pragma mark - Forward and Backward Propagation
 
 -(void) forwardPass{
@@ -78,7 +82,7 @@
     for (int i=0; i<[outputNeurons count]; i++) {
         Neuron* outNeuron = outputNeurons[i];
         CGFloat deltaOutput = [outNeuron deltaNode];
-        CGFloat outWeight = [outNeuron weightForInputNeuron:self givenWeights:oldWeights];
+        CGFloat outWeight = [outNeuron previousWeightForInputNeuron:self];
         CGFloat dErrOutdOut = (deltaOutput * outWeight);
 
         dErrTotaldOut += dErrOutdOut;

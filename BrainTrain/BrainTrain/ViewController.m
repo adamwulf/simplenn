@@ -55,10 +55,14 @@
     o1 = [[Neuron alloc] initWithName:@"o1"];
     o2 = [[Neuron alloc] initWithName:@"o2"];
 
+    [o1 addInput:i1 withWeight:.5];
+    [o1 addInput:i2 withWeight:.55];
     [o1 addInput:h1 withWeight:.4];
     [o1 addInput:h2 withWeight:.45];
     [o1 addInput:b2];
 
+    [o2 addInput:i1 withWeight:.5];
+    [o2 addInput:i2 withWeight:.55];
     [o2 addInput:h1 withWeight:.5];
     [o2 addInput:h2 withWeight:.55];
     [o2 addInput:b2];
