@@ -42,6 +42,8 @@
     return self;
 }
 
+#pragma mark - Public Methods
+
 -(void) addInput:(Neuron*)neuron{
     [self addInput:neuron withWeight:.5];
 }
@@ -52,15 +54,14 @@
     [neuron addOutput:self];
 }
 
-
 -(CGFloat) latestOutput{
     return output;
 }
+
 -(CGFloat) errorGivenTarget:(CGFloat)targetVal{
     CGFloat diff = (targetVal - output);
     return .5 * diff * diff;
 }
-
 
 -(CGFloat) weightForInputNeuron:(Neuron*)neuron{
     return [self weightForInputNeuron:neuron givenWeights:weights];
@@ -77,6 +78,10 @@
     output = [self squash:netInput];
 }
 
+// most neurons will just use [backprop] to
+// process the back propagation. The output
+// neurons will need to use backpropGivenOutput:
+// to begin the training.
 -(void) backprop{
     CGFloat dErrTotaldOut = 0;
     for (int i=0; i<[outputNeurons count]; i++) {
@@ -90,14 +95,13 @@
     [self backpropGivendErrTotaldOut:dErrTotaldOut];
 }
 
-
 -(void) backpropGivenOutput:(CGFloat)targetVal{
     CGFloat dErrTotaldOut = ([self latestOutput] - targetVal);
 
     [self backpropGivendErrTotaldOut:dErrTotaldOut];
 }
 
-#pragma mark - Private
+#pragma mark - Private Forward and Backward Propagation
 
 -(void) backpropGivendErrTotaldOut:(CGFloat)dTotaldOut{
     CGFloat dOutdNet = [self latestOutput] * (1 - [self latestOutput]);
@@ -119,16 +123,6 @@
     
 }
 
--(void) addOutput:(Neuron*)neuron{
-    outputNeurons = [outputNeurons arrayByAddingObject:neuron];
-}
-
--(CGFloat) weightForInputNeuron:(Neuron*)neuron givenWeights:(NSArray*)givenWeights{
-    return [[givenWeights objectAtIndex:[inputNeurons indexOfObject:neuron]] floatValue];
-}
-
-#pragma mark - Private Helpers
-
 -(CGFloat) calculateNetInput{
     CGFloat sum = 0;
     inputLatestValues = @[];
@@ -145,6 +139,19 @@
 
 -(CGFloat) squash:(CGFloat)netInput{
     return 1.0 / (1.0 + exp(-netInput));
+}
+
+#pragma mark - Private Helpers
+
+// This way, all neurons have an array of both their inputs
+// and their outputs. This helps make some calculations a bit
+// easier.
+-(void) addOutput:(Neuron*)neuron{
+    outputNeurons = [outputNeurons arrayByAddingObject:neuron];
+}
+
+-(CGFloat) weightForInputNeuron:(Neuron*)neuron givenWeights:(NSArray*)givenWeights{
+    return [[givenWeights objectAtIndex:[inputNeurons indexOfObject:neuron]] floatValue];
 }
 
 -(NSString*) description{

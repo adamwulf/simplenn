@@ -95,6 +95,8 @@
         NSLog(@"  e total: %f", errorTotal);
 
         if(errorTotal <= 0.000035085){
+            // Can I beat the error rate in the tutorial
+            // in fewer than 10,000 iterations???!
             NSLog(@"error <= 0.000035085");
         }
 
