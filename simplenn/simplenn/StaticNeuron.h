@@ -10,6 +10,8 @@
 
 @interface StaticNeuron : Neuron
 
--(instancetype) initWithValue:(CGFloat)val;
+@property (nonatomic, assign) CGFloat value;
+
+-(instancetype) initWithValue:(CGFloat)value;
 
 @end

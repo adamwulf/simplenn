@@ -94,7 +94,6 @@
             NSLog(@"error <= 0.000035085");
         }
 
-
         NSLog(@"  pre-o2.bias: %f", [o1 weightForInputNeuron:b2]);
         NSLog(@"  pre-o2.bias: %f", [o2 weightForInputNeuron:b2]);
 

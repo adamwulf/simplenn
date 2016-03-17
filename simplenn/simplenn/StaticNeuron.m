@@ -8,9 +8,9 @@
 
 #import "StaticNeuron.h"
 
-@implementation StaticNeuron{
-    CGFloat value;
-}
+@implementation StaticNeuron
+
+@synthesize value;
 
 -(instancetype) initWithValue:(CGFloat)val{
     if(self = [super initWithName:[NSString stringWithFormat:@"%.2f", val]]){

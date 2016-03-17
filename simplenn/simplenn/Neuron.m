@@ -22,6 +22,7 @@
     return .5;
 }
 
+// name of this neuron for debugging
 @synthesize name;
 
 // for forward prop
@@ -51,19 +52,10 @@
     [neuron addOutput:self];
 }
 
--(void) addOutput:(Neuron*)neuron{
-    outputNeurons = [outputNeurons arrayByAddingObject:neuron];
-}
-
--(void) forwardPass{
-    CGFloat netInput = [self calculateNetInput];
-    output = [self squash:netInput];
-}
 
 -(CGFloat) latestOutput{
     return output;
 }
-
 -(CGFloat) errorGivenTarget:(CGFloat)targetVal{
     CGFloat diff = (targetVal - output);
     return .5 * diff * diff;
@@ -74,10 +66,12 @@
     return [self weightForInputNeuron:neuron givenWeights:weights];
 }
 
--(CGFloat) weightForInputNeuron:(Neuron*)neuron givenWeights:(NSArray*)givenWeights{
-    return [[givenWeights objectAtIndex:[inputNeurons indexOfObject:neuron]] floatValue];
-}
+#pragma mark - Forward and Backward Propagation
 
+-(void) forwardPass{
+    CGFloat netInput = [self calculateNetInput];
+    output = [self squash:netInput];
+}
 
 -(void) backprop{
     CGFloat dErrTotaldOut = 0;
@@ -99,6 +93,7 @@
     [self backpropGivendErrTotaldOut:dErrTotaldOut];
 }
 
+#pragma mark - Private
 
 -(void) backpropGivendErrTotaldOut:(CGFloat)dTotaldOut{
     CGFloat dOutdNet = [self latestOutput] * (1 - [self latestOutput]);
@@ -114,13 +109,21 @@
 
         updatedWeights = [updatedWeights arrayByAddingObject:@(weight - [Neuron learningRate] * dTotaldinput)];
     }
-    
+
     oldWeights = weights;
     weights = updatedWeights;
-
+    
 }
 
-#pragma mark - private
+-(void) addOutput:(Neuron*)neuron{
+    outputNeurons = [outputNeurons arrayByAddingObject:neuron];
+}
+
+-(CGFloat) weightForInputNeuron:(Neuron*)neuron givenWeights:(NSArray*)givenWeights{
+    return [[givenWeights objectAtIndex:[inputNeurons indexOfObject:neuron]] floatValue];
+}
+
+#pragma mark - Private Helpers
 
 -(CGFloat) calculateNetInput{
     CGFloat sum = 0;
