@@ -44,6 +44,10 @@
 
 #pragma mark - Public Methods
 
+-(NSArray*) inputs{
+    return inputNeurons;
+}
+
 -(void) addInput:(Neuron*)neuron{
     [self addInput:neuron withWeight:.5];
 }

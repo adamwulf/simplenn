@@ -12,6 +12,6 @@
 
 @property (nonatomic, assign) CGFloat value;
 
--(instancetype) initWithValue:(CGFloat)value;
+-(instancetype) initWithName:(NSString*)name andValue:(CGFloat)val;
 
 @end

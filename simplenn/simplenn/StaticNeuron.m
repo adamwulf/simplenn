@@ -12,8 +12,8 @@
 
 @synthesize value;
 
--(instancetype) initWithValue:(CGFloat)val{
-    if(self = [super initWithName:[NSString stringWithFormat:@"%.2f", val]]){
+-(instancetype) initWithName:(NSString*)name andValue:(CGFloat)val{
+    if(self = [super initWithName:name]){
         value = val;
     }
     return self;

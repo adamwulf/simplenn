@@ -14,6 +14,7 @@
 @property (nonatomic, readonly) NSArray* weights;
 @property (nonatomic, readonly) CGFloat deltaNode;
 @property (nonatomic, readonly) NSString* name;
+@property (nonatomic, readonly) NSArray* inputs;
 
 -(instancetype) init NS_UNAVAILABLE;
 
