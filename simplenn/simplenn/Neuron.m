@@ -26,7 +26,6 @@
 
 // for forward prop
 @synthesize weights;
-@synthesize bias;
 
 // for backprop
 @synthesize deltaNode;
@@ -71,8 +70,12 @@
 }
 
 
--(CGFloat) weightForNeuron:(Neuron*)neuron{
-    return [[oldWeights objectAtIndex:[inputNeurons indexOfObject:neuron]] floatValue];
+-(CGFloat) weightForInputNeuron:(Neuron*)neuron{
+    return [self weightForInputNeuron:neuron givenWeights:weights];
+}
+
+-(CGFloat) weightForInputNeuron:(Neuron*)neuron givenWeights:(NSArray*)givenWeights{
+    return [[givenWeights objectAtIndex:[inputNeurons indexOfObject:neuron]] floatValue];
 }
 
 
@@ -81,7 +84,7 @@
     for (int i=0; i<[outputNeurons count]; i++) {
         Neuron* outNeuron = outputNeurons[i];
         CGFloat deltaOutput = [outNeuron deltaNode];
-        CGFloat outWeight = [outNeuron weightForNeuron:self];
+        CGFloat outWeight = [outNeuron weightForInputNeuron:self givenWeights:oldWeights];
         CGFloat dErrOutdOut = (deltaOutput * outWeight);
 
         dErrTotaldOut += dErrOutdOut;
@@ -109,7 +112,7 @@
         CGFloat dTotaldinput = deltaNode * dNetdInput;
         CGFloat weight = [weights[i] floatValue];
 
-        updatedWeights = [updatedWeights arrayByAddingObject:@(weight - [Neuron learningRate] *dTotaldinput)];
+        updatedWeights = [updatedWeights arrayByAddingObject:@(weight - [Neuron learningRate] * dTotaldinput)];
     }
     
     oldWeights = weights;
@@ -129,7 +132,6 @@
         sum += weight * inputValue;
         inputLatestValues = [inputLatestValues arrayByAddingObject:@(inputValue)];
     }
-    sum += [bias latestOutput];
 
     return sum;
 }

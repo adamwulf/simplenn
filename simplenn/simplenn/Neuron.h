@@ -11,7 +11,6 @@
 
 @interface Neuron : NSObject
 
-@property (nonatomic, strong) Neuron* bias;
 @property (nonatomic, readonly) NSArray* weights;
 @property (nonatomic, readonly) CGFloat deltaNode;
 @property (nonatomic, readonly) NSString* name;
@@ -23,6 +22,8 @@
 -(void) addInput:(Neuron*)neuron;
 
 -(void) addInput:(Neuron*)neuron withWeight:(CGFloat)weight;
+
+-(CGFloat) weightForInputNeuron:(Neuron*)neuron;
 
 -(CGFloat) latestOutput;
 

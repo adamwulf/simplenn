@@ -33,7 +33,7 @@
 
     // bias
     b1 = [[StaticNeuron alloc] initWithValue:.35];
-    b2 = [[StaticNeuron alloc] initWithValue:.6];
+    b2 = [[StaticNeuron alloc] initWithValue:1.0];
 
     // input
     i1 = [[StaticNeuron alloc] initWithValue:.05];
@@ -45,11 +45,11 @@
 
     [h1 addInput:i1 withWeight:.15];
     [h1 addInput:i2 withWeight:.2];
-    [h1 setBias:b1];
+    [h1 addInput:b1];
 
     [h2 addInput:i1 withWeight:.25];
     [h2 addInput:i2 withWeight:.3];
-    [h2 setBias:b1];
+    [h2 addInput:b1];
 
     // output
     o1 = [[Neuron alloc] initWithName:@"o1"];
@@ -57,12 +57,11 @@
 
     [o1 addInput:h1 withWeight:.4];
     [o1 addInput:h2 withWeight:.45];
+    [o1 addInput:b2];
 
     [o2 addInput:h1 withWeight:.5];
     [o2 addInput:h2 withWeight:.55];
-
-    [o1 setBias:b2];
-    [o2 setBias:b2];
+    [o2 addInput:b2];
 }
 
 -(void) viewDidAppear:(BOOL)animated{
@@ -92,10 +91,16 @@
         NSLog(@"  e total: %f", errorTotal);
 
 
+        NSLog(@"  pre-o2.bias: %f", [o1 weightForInputNeuron:b2]);
+        NSLog(@"  pre-o2.bias: %f", [o2 weightForInputNeuron:b2]);
+
         [o1 backpropGivenOutput:o1Target];
         [o2 backpropGivenOutput:o2Target];
         [h1 backprop];
         [h2 backprop];
+
+        NSLog(@"  post-o2.bias: %f", [o1 weightForInputNeuron:b2]);
+        NSLog(@"  post-o2.bias: %f", [o2 weightForInputNeuron:b2]);
     }
 
     NSLog(@"asdf");
