@@ -7,4 +7,7 @@
    <FileRef
       location = "group:BrainTrain/BrainTrain.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:/Users/adamwulf/Documents/Code/simple-nn/simple-nn-vis/simple-nn-vis.xcodeproj">
+   </FileRef>
 </Workspace>
