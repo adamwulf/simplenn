@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import <simplenn/simplenn.h>
 #import "NeuralView.h"
+#import "InstantPanGestureRecognizer.h"
 
 @interface ViewController ()
 
@@ -34,6 +35,7 @@
     [super viewDidLoad];
 
     link = [CADisplayLink displayLinkWithTarget:self.view selector:@selector(setNeedsDisplay)];
+    link.frameInterval = 2;
     [link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
 
     // bias
@@ -94,46 +96,51 @@
     CGFloat o1Target = .01;
     CGFloat o2Target = .99;
 
-    for (int i=0; i<10000; i++) {
+    NSInteger i=0;
+    while(YES){
         @synchronized(self) {
-            NSLog(@"run %i", i + 1);
             [h1 forwardPass];
             [h2 forwardPass];
             [o1 forwardPass];
             [o2 forwardPass];
 
-            NSLog(@"  o1: %f", [o1 latestOutput]);
-            NSLog(@"  o2: %f", [o2 latestOutput]);
+            if(i%10000 == 0){
+                NSLog(@"run %ld", i + 1);
+                NSLog(@"  o1: %f", [o1 latestOutput]);
+                NSLog(@"  o2: %f", [o2 latestOutput]);
+            }
 
             CGFloat e1 = [o1 errorGivenTarget:o1Target];
             CGFloat e2 = [o2 errorGivenTarget:o2Target];
 
-            NSLog(@"  e1: %f", e1);
-            NSLog(@"  e2: %f", e2);
+//            NSLog(@"  e1: %f", e1);
+//            NSLog(@"  e2: %f", e2);
 
             CGFloat errorTotal = e1 + e2;
 
-            NSLog(@"  e total: %f", errorTotal);
+//            if(i%100 == 0){
+//                NSLog(@"  e total: %f", errorTotal);
+//            }
 
             if(errorTotal <= 0.000035085){
                 // Can I beat the error rate in the tutorial
                 // in fewer than 10,000 iterations???!
-                NSLog(@"error <= 0.000035085");
+//                NSLog(@"error <= 0.000035085");
             }
 
-            NSLog(@"  pre-o2.bias: %f", [o1 weightForInputNeuron:b2]);
-            NSLog(@"  pre-o2.bias: %f", [o2 weightForInputNeuron:b2]);
+//            NSLog(@"  pre-o2.bias: %f", [o1 weightForInputNeuron:b2]);
+//            NSLog(@"  pre-o2.bias: %f", [o2 weightForInputNeuron:b2]);
 
             [o1 backpropGivenOutput:o1Target];
             [o2 backpropGivenOutput:o2Target];
             [h1 backprop];
             [h2 backprop];
 
-            NSLog(@"  post-o2.bias: %f", [o1 weightForInputNeuron:b2]);
-            NSLog(@"  post-o2.bias: %f", [o2 weightForInputNeuron:b2]);
-        }
+//            NSLog(@"  post-o2.bias: %f", [o1 weightForInputNeuron:b2]);
+//            NSLog(@"  post-o2.bias: %f", [o2 weightForInputNeuron:b2]);
 
-        [NSThread sleepForTimeInterval:.03];
+            i++;
+        }
     }
 }
 

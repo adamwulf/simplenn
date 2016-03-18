@@ -26,6 +26,8 @@
 
 -(CGFloat) weightForInputNeuron:(Neuron*)neuron;
 
+-(void) updateWeight:(CGFloat)weight forInputNeuron:(Neuron*)neuron;
+
 -(CGFloat) latestOutput;
 
 -(void) forwardPass;

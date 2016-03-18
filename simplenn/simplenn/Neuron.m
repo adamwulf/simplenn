@@ -71,6 +71,12 @@
     return [self weightForInputNeuron:neuron givenWeights:weights];
 }
 
+-(void) updateWeight:(CGFloat)weight forInputNeuron:(Neuron *)neuron{
+    NSMutableArray* newWeights = [NSMutableArray arrayWithArray:weights];
+    [newWeights replaceObjectAtIndex:[inputNeurons indexOfObject:neuron] withObject:@(weight)];
+    weights = newWeights;
+}
+
 -(CGFloat) previousWeightForInputNeuron:(Neuron*)neuron{
     return [self weightForInputNeuron:neuron givenWeights:oldWeights];
 }
