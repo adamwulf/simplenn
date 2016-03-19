@@ -15,6 +15,10 @@
 
     CGPoint gestureStartLocation;
     NSInteger heldNeuronIndex;
+
+
+    Neuron* weightBetween1;
+    Neuron* weightBetween2;
 }
 
 @synthesize inputs;
@@ -24,6 +28,7 @@
 @synthesize unselectedColor;
 @synthesize selectedInputColor;
 @synthesize selectedOutputColor;
+@synthesize selectedWeightColor;
 
 -(instancetype) initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
@@ -48,7 +53,7 @@
     unselectedColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.5];
     selectedInputColor = [UIColor blueColor];
     selectedOutputColor = [UIColor colorWithRed:0 green:.5 blue:0 alpha:1.0];
-
+    selectedWeightColor = [UIColor colorWithRed:.5 green:0 blue:0 alpha:1.0];
 
     self.clearsContextBeforeDrawing = YES;
 
@@ -62,6 +67,8 @@
 #pragma mark - Gestures
 
 -(void) tapGesture:(UITapGestureRecognizer*)tapGesture{
+    weightBetween1 = nil;
+    weightBetween2 = nil;
     heldNeuronIndex = NSNotFound;
     for (int i=0; i<[neurons count]; i++) {
         if([NeuralView distance:[positions[i] CGPointValue] and:[tapGesture locationInView:self]] < 20){
@@ -78,8 +85,8 @@
         CGFloat dist = [self distanceFromPoint:[tapGesture locationInView:self] between:[self locationForNeuron:n1] and:[self locationForNeuron:n2]];
         if(dist < minDist){
             minDist = dist;
-            mainNeuron = n1;
-            inputNeuron = n2;
+            weightBetween1 = n1;
+            weightBetween2 = n2;
         }
     }];
 
@@ -88,6 +95,8 @@
 
 -(void) panGesture:(InstantPanGestureRecognizer*)gesture{
     if(gesture.state == UIGestureRecognizerStateBegan){
+        weightBetween1 = nil;
+        weightBetween2 = nil;
         heldNeuronIndex = NSNotFound;
         CGFloat minDist = 100;
         CGPoint startLoc = [gesture locationInView:self];
@@ -185,7 +194,9 @@
 
         for (Neuron* input in neuron.inputs) {
 
-            if(heldNeuronIndex != NSNotFound && input == neurons[heldNeuronIndex]){
+            if(neuron == weightBetween1 && input == weightBetween2){
+                [selectedWeightColor setStroke];
+            }else if(heldNeuronIndex != NSNotFound && input == neurons[heldNeuronIndex]){
                 [selectedOutputColor setStroke];
             }else{
                 [inputColor setStroke];

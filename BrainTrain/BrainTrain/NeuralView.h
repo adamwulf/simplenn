@@ -24,6 +24,7 @@ typedef enum NSInteger{
 @property (nonatomic, strong) UIColor* unselectedColor;
 @property (nonatomic, strong) UIColor* selectedInputColor;
 @property (nonatomic, strong) UIColor* selectedOutputColor;
+@property (nonatomic, strong) UIColor* selectedWeightColor;
 
 -(void) addNeuron:(Neuron*)neuron type:(NeuronType)type;
 
