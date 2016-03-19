@@ -109,10 +109,15 @@
     NSInteger i=0;
     while(YES){
         @synchronized(self) {
-            [h1 forwardPass];
-            [h2 forwardPass];
-            [o1 forwardPass];
-            [o2 forwardPass];
+
+            for (Neuron* neuron in neuralView.neurons) {
+                [neuron forwardPass];
+            }
+//
+//            [h1 forwardPass];
+//            [h2 forwardPass];
+//            [o1 forwardPass];
+//            [o2 forwardPass];
 
 //            if(i%10000 == 0){
 //                NSLog(@"run %ld", i + 1);
@@ -141,10 +146,15 @@
 //            NSLog(@"  pre-o2.bias: %f", [o1 weightForInputNeuron:b2]);
 //            NSLog(@"  pre-o2.bias: %f", [o2 weightForInputNeuron:b2]);
 
-            [o1 backpropGivenOutput:o1Target];
-            [o2 backpropGivenOutput:o2Target];
-            [h1 backprop];
-            [h2 backprop];
+            for (Neuron* neuron in [neuralView.neurons reverseObjectEnumerator]) {
+                if(neuron == o1){
+                    [neuron backpropGivenOutput:o1Target];
+                }else if(neuron == o2){
+                    [neuron backpropGivenOutput:o2Target];
+                }else{
+                    [neuron backprop];
+                }
+            }
 
 //            NSLog(@"  post-o2.bias: %f", [o1 weightForInputNeuron:b2]);
 //            NSLog(@"  post-o2.bias: %f", [o2 weightForInputNeuron:b2]);
@@ -178,6 +188,36 @@
 
 -(void) resetRandomWeight{
     [neuralView resetRandomWeight];
+}
+
+-(NSString*)filename{
+    return [[ViewController documentsPath] stringByAppendingPathComponent:@"foo.data"];
+}
+
+-(void) save{
+    NSDictionary* data;
+    @synchronized(self) {
+        data = [neuralView asDictionary];
+    }
+    [NSKeyedArchiver archiveRootObject:data toFile:[self filename]];
+}
+
+-(void) load{
+    NSDictionary* dictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self filename]];
+    if(dictionary){
+        @synchronized(self) {
+            [neuralView loadDictionary:dictionary];
+        }
+    }
+}
+
+
+static NSArray* userDocumentsPaths;
++(NSString*) documentsPath{
+    if(!userDocumentsPaths){
+        userDocumentsPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    }
+    return [userDocumentsPaths objectAtIndex:0];
 }
 
 @end

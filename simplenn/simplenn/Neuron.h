@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-@interface Neuron : NSObject
+@interface Neuron : NSObject<NSCoding>
 
 @property (nonatomic, readonly) NSArray* weights;
 @property (nonatomic, readonly) CGFloat deltaNode;

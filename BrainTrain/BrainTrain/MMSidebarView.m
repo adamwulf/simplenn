@@ -38,6 +38,20 @@
     [self addSubview:randomWeightButton];
     [randomWeightButton setCenter:CGPointMake(self.bounds.size.width / 2, 40)];
 
+    UIButton* saveButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [saveButton setTitle:@"Save" forState:UIControlStateNormal];
+    [saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
+    [saveButton sizeToFit];
+    [self addSubview:saveButton];
+    [saveButton setCenter:CGPointMake(self.bounds.size.width / 2, 140)];
+
+    UIButton* loadButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [loadButton setTitle:@"Load" forState:UIControlStateNormal];
+    [loadButton addTarget:self action:@selector(load) forControlEvents:UIControlEventTouchUpInside];
+    [loadButton sizeToFit];
+    [self addSubview:loadButton];
+    [loadButton setCenter:CGPointMake(self.bounds.size.width / 2, 240)];
+
 }
 
 #pragma mark - Actions
@@ -48,6 +62,16 @@
 
 -(void) resetRandomWeight{
     [self.delegate resetRandomWeight];
+}
+
+#pragma mark - Save and Load
+
+-(void) save{
+    [self.delegate save];
+}
+
+-(void) load{
+    [self.delegate load];
 }
 
 @end

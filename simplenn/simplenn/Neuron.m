@@ -55,6 +55,7 @@
 -(void) addInput:(Neuron*)neuron withWeight:(CGFloat)weight{
     inputNeurons = [inputNeurons arrayByAddingObject:neuron];
     weights = [weights arrayByAddingObject:@(weight)];
+    oldWeights = [oldWeights arrayByAddingObject:@(weight)];
     [neuron addOutput:self];
 }
 
@@ -93,6 +94,9 @@
 // neurons will need to use backpropGivenOutput:
 // to begin the training.
 -(void) backprop{
+    if(![oldWeights count]){
+        oldWeights = [weights copy];
+    }
     CGFloat dErrTotaldOut = 0;
     for (int i=0; i<[outputNeurons count]; i++) {
         Neuron* outNeuron = outputNeurons[i];
@@ -167,5 +171,31 @@
 -(NSString*) description{
     return [NSString stringWithFormat:@"[Neuron %@]", [self name]];
 }
+
+#pragma mark - NSCoding
+
+-(instancetype) initWithCoder:(NSCoder *)aDecoder{
+    if(self = [super init]){
+        weights = [aDecoder decodeObjectForKey:@"weights"];
+        deltaNode = [aDecoder decodeFloatForKey:@"deltaNode"];
+        name = [aDecoder decodeObjectForKey:@"name"];
+        inputNeurons = [aDecoder decodeObjectForKey:@"inputNeurons"];
+        outputNeurons = [aDecoder decodeObjectForKey:@"outputNeurons"];
+        oldWeights = [aDecoder decodeObjectForKey:@"oldWeights"];
+        output = [aDecoder decodeFloatForKey:@"output"];
+    }
+    return self;
+}
+
+-(void) encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeObject:weights forKey:@"weights"];
+    [aCoder encodeFloat:deltaNode forKey:@"deltaNode"];
+    [aCoder encodeObject:name forKey:@"name"];
+    [aCoder encodeObject:inputNeurons forKey:@"inputNeurons"];
+    [aCoder encodeObject:outputNeurons forKey:@"outputNeurons"];
+    [aCoder encodeObject:oldWeights forKey:@"oldWeights"];
+    [aCoder encodeFloat:output forKey:@"output"];
+}
+
 
 @end

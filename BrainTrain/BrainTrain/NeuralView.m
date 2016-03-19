@@ -11,12 +11,13 @@
 #import "MMVector.h"
 
 @implementation NeuralView{
-    NSArray* neurons;
     NSArray* positions;
 
     CGPoint gestureStartLocation;
     NSInteger heldNeuronIndex;
 }
+
+@synthesize neurons;
 
 -(instancetype) initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
@@ -115,6 +116,17 @@
         int foo2 = rand() % (int)[[neurons[foo] inputs] count];
         [neuronToReset updateWeight:(rand() % 100) / 1000.0 forInputNeuron:neuronToReset.inputs[foo2]];
     }
+}
+
+-(NSDictionary*) asDictionary{
+    return @{ @"neurons" : neurons, @"positions" : positions};
+}
+
+-(void) loadDictionary:(NSDictionary*)data{
+    neurons = data[@"neurons"];
+    positions = data[@"positions"];
+
+    NSAssert(neurons && positions, @"data loaded ok");
 }
 
 #pragma mark - Rendering

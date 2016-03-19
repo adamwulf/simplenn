@@ -14,4 +14,8 @@
 
 -(void) resetRandomWeight;
 
+-(void) save;
+
+-(void) load;
+
 @end

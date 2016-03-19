@@ -12,8 +12,14 @@
 
 @interface NeuralView : UIView
 
+@property (nonatomic, readonly) NSArray* neurons;
+
 -(void) addNeuron:(Neuron*)neuron;
 
 -(void) resetRandomWeight;
+
+-(NSDictionary*) asDictionary;
+
+-(void) loadDictionary:(NSDictionary*)data;
 
 @end
