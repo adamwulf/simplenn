@@ -21,6 +21,10 @@ typedef enum NSInteger{
 @property (nonatomic, readonly) NSArray* neurons;
 @property (nonatomic, readonly) NSArray* outputs;
 
+@property (nonatomic, strong) UIColor* unselectedColor;
+@property (nonatomic, strong) UIColor* selectedInputColor;
+@property (nonatomic, strong) UIColor* selectedOutputColor;
+
 -(void) addNeuron:(Neuron*)neuron type:(NeuronType)type;
 
 -(void) resetRandomWeight;

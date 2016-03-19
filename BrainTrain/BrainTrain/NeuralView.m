@@ -21,6 +21,10 @@
 @synthesize neurons;
 @synthesize outputs;
 
+@synthesize unselectedColor;
+@synthesize selectedInputColor;
+@synthesize selectedOutputColor;
+
 -(instancetype) initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
         [self initCommon];
@@ -41,6 +45,11 @@
     neurons = @[];
     positions = @[];
 
+    unselectedColor = [[UIColor lightGrayColor] colorWithAlphaComponent:.5];
+    selectedInputColor = [UIColor blueColor];
+    selectedOutputColor = [UIColor colorWithRed:0 green:.5 blue:0 alpha:1.0];
+
+
     self.clearsContextBeforeDrawing = YES;
 
     InstantPanGestureRecognizer* pan = [[InstantPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
@@ -53,9 +62,11 @@
 #pragma mark - Gestures
 
 -(void) tapGesture:(UITapGestureRecognizer*)tapGesture{
+    heldNeuronIndex = NSNotFound;
     for (int i=0; i<[neurons count]; i++) {
         if([NeuralView distance:[positions[i] CGPointValue] and:[tapGesture locationInView:self]] < 20){
             NSLog(@"tapped %@", neurons[i]);
+            heldNeuronIndex = i;
             return;
         }
     }
@@ -77,7 +88,7 @@
 
 -(void) panGesture:(InstantPanGestureRecognizer*)gesture{
     if(gesture.state == UIGestureRecognizerStateBegan){
-        heldNeuronIndex = NSIntegerMax;
+        heldNeuronIndex = NSNotFound;
         CGFloat minDist = 100;
         CGPoint startLoc = [gesture locationInView:self];
         for (int i=0; i<[neurons count]; i++) {
@@ -91,7 +102,7 @@
     }else if(gesture.state == UIGestureRecognizerStateChanged){
         CGPoint trans = [gesture translationInView:self];
 
-        if(heldNeuronIndex != NSIntegerMax){
+        if(heldNeuronIndex != NSNotFound){
             CGPoint newLoc = gestureStartLocation;
             newLoc.x += trans.x;
             newLoc.y += trans.y;
@@ -149,9 +160,12 @@
 - (void)drawRect:(CGRect)rect {
     // Drawing code
 
-    [self enumerateNeurons:^(Neuron *neuron, CGPoint loc) {
+    [self enumerateNeurons:^(Neuron *neuron, CGPoint loc, NSInteger idx) {
 
         CGFloat radius = 20;
+        CGFloat arrowSize = 5;
+
+        [[UIColor blackColor] setStroke];
 
         UIBezierPath* path = [UIBezierPath bezierPathWithArcCenter:loc radius:radius startAngle:0 endAngle:2*M_PI clockwise:YES];
         path.lineWidth = 1;
@@ -162,8 +176,21 @@
         CGPoint nameLoc = CGPointMake(loc.x - nameSize.width / 2, loc.y - nameSize.height / 2);
         [[neuron name] drawAtPoint:nameLoc withAttributes:attrs];
 
+        UIColor* inputColor;
+        if(idx != heldNeuronIndex){
+            inputColor = unselectedColor;
+        }else{
+            inputColor = selectedInputColor;
+        }
 
         for (Neuron* input in neuron.inputs) {
+
+            if(heldNeuronIndex != NSNotFound && input == neurons[heldNeuronIndex]){
+                [selectedOutputColor setStroke];
+            }else{
+                [inputColor setStroke];
+            }
+
             CGPoint loc2 = [self locationForNeuron:input];
             MMVector* vec = [MMVector vectorWithPoint:loc andPoint:loc2];
             vec = [vec normal];
@@ -173,13 +200,22 @@
 
             CGFloat weight = [neuron weightForInputNeuron:input];
             UIBezierPath* line = [UIBezierPath bezierPath];
-            [line moveToPoint:adjustedLoc];
-            [line addLineToPoint:loc2];
+            [line moveToPoint:loc2];
+            [line addLineToPoint:adjustedLoc];
+
+            CGPoint arrow = [vec pointFromPoint:adjustedLoc distance:arrowSize];
+            vec = [vec perpendicular];
+            arrow = [vec pointFromPoint:arrow distance:-arrowSize];
+            [line addLineToPoint:arrow];
+            arrow = [vec pointFromPoint:arrow distance:2 * arrowSize];
+            [line addLineToPoint:arrow];
+            [line addLineToPoint:adjustedLoc];
+
+
             line.lineWidth = ABS(weight * 5);
             [line stroke];
         }
     }];
-
 }
 
 
@@ -195,9 +231,9 @@
 }
 
 // will iterate over every weight
--(void) enumerateNeurons:(void(^)(Neuron* neuron, CGPoint loc))iterationBlock{
+-(void) enumerateNeurons:(void(^)(Neuron* neuron, CGPoint loc, NSInteger idx))iterationBlock{
     for (int i=0; i<[neurons count]; i++) {
-        iterationBlock(neurons[i], [positions[i] CGPointValue]);
+        iterationBlock(neurons[i], [positions[i] CGPointValue], i);
     }
 }
 
