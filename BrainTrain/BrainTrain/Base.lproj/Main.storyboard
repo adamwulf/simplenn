@@ -3,9 +3,10 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Delegate-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
@@ -13,11 +14,49 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="NeuralView">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OIv-3d-nKL" customClass="NeuralView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XEx-Ci-Pwh" customClass="MMSidebarView">
+                                <rect key="frame" x="360" y="0.0" width="240" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="ySJ-Vc-Nrl"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Aq2-nx-2q5"/>
+                                </connections>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OIv-3d-nKL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="6M5-tc-5EF"/>
+                            <constraint firstItem="XEx-Ci-Pwh" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Drm-Vo-OI1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XEx-Ci-Pwh" secondAttribute="trailing" constant="-20" id="Q0d-yE-pD0"/>
+                            <constraint firstItem="XEx-Ci-Pwh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Rcd-A3-ale"/>
+                            <constraint firstItem="XEx-Ci-Pwh" firstAttribute="height" secondItem="OIv-3d-nKL" secondAttribute="height" id="Se8-T0-cVA"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="OIv-3d-nKL" secondAttribute="bottom" id="Tqd-nO-mOD"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XEx-Ci-Pwh" secondAttribute="bottom" constant="-20" id="Vg2-RH-stG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OIv-3d-nKL" secondAttribute="trailing" constant="-20" id="bIt-Fo-37m"/>
+                            <constraint firstItem="OIv-3d-nKL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="m1Z-Cr-BtX"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Rcd-A3-ale"/>
+                                <exclude reference="Vg2-RH-stG"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="neuralView" destination="OIv-3d-nKL" id="Psa-n0-wKK"/>
+                        <outlet property="sidebarView" destination="XEx-Ci-Pwh" id="dsH-s2-BQf"/>
+                        <outlet property="view" destination="8bC-Xf-vdC" id="GMc-hi-vUO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

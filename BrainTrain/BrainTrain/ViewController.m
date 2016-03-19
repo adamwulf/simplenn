@@ -9,9 +9,14 @@
 #import "ViewController.h"
 #import <simplenn/simplenn.h>
 #import "NeuralView.h"
+#import "MMSidebarView.h"
+#import "MMSidebarViewDelegate.h"
 #import "InstantPanGestureRecognizer.h"
 
-@interface ViewController ()
+@interface ViewController ()<MMSidebarViewDelegate>
+
+@property (nonatomic, strong) IBOutlet NeuralView* neuralView;
+@property (nonatomic, strong) IBOutlet MMSidebarView* sidebarView;
 
 @end
 
@@ -31,10 +36,17 @@
     Neuron* o2;
 }
 
+@synthesize neuralView;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    link = [CADisplayLink displayLinkWithTarget:self.view selector:@selector(setNeedsDisplay)];
+    UIScreenEdgePanGestureRecognizer* edgePanGesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(edgePan:)];
+    edgePanGesture.edges = UIRectEdgeRight;
+    [self.view addGestureRecognizer:edgePanGesture];
+
+
+    link = [CADisplayLink displayLinkWithTarget:neuralView selector:@selector(setNeedsDisplay)];
     link.frameInterval = 2;
     [link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
 
@@ -74,16 +86,14 @@
     [o2 addInput:h2 withWeight:.55];
     [o2 addInput:b2];
 
-    NeuralView* v = (NeuralView*)self.view;
-
-    [v addNeuron:i1];
-    [v addNeuron:i2];
-    [v addNeuron:h1];
-    [v addNeuron:h2];
-    [v addNeuron:o1];
-    [v addNeuron:o2];
-    [v addNeuron:b1];
-    [v addNeuron:b2];
+    [neuralView addNeuron:i1];
+    [neuralView addNeuron:i2];
+    [neuralView addNeuron:h1];
+    [neuralView addNeuron:h2];
+    [neuralView addNeuron:o1];
+    [neuralView addNeuron:o2];
+    [neuralView addNeuron:b1];
+    [neuralView addNeuron:b2];
 }
 
 -(void) viewDidAppear:(BOOL)animated{
@@ -142,6 +152,32 @@
             i++;
         }
     }
+}
+
+#pragma mark - Gestures
+
+-(void) edgePan:(UIScreenEdgePanGestureRecognizer*)edgeGesture{
+    if(edgeGesture.state == UIGestureRecognizerStateRecognized){
+        [UIView animateWithDuration:.3 animations:^{
+            CGRect r = self.sidebarView.bounds;
+            r.origin.x = self.view.bounds.size.width - self.sidebarView.bounds.size.width;
+            self.sidebarView.frame = r;
+        }];
+    }
+}
+
+#pragma mark - MMSidebarViewDelegate
+
+-(void)sidebarShouldClose{
+    [UIView animateWithDuration:.3 animations:^{
+        CGRect r = self.sidebarView.bounds;
+        r.origin.x = self.view.bounds.size.width;
+        self.sidebarView.frame = r;
+    }];
+}
+
+-(void) resetRandomWeight{
+    [neuralView resetRandomWeight];
 }
 
 @end

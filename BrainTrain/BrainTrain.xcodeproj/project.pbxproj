@@ -10,6 +10,7 @@
 		C50635AD1C9BD1DE00545AB0 /* InstantPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = C50635AC1C9BD1DE00545AB0 /* InstantPanGestureRecognizer.m */; };
 		C50635B01C9BD4A100545AB0 /* MMVector.m in Sources */ = {isa = PBXBuildFile; fileRef = C50635AF1C9BD4A100545AB0 /* MMVector.m */; };
 		C53BAF201C9A763500640CF8 /* NeuralView.m in Sources */ = {isa = PBXBuildFile; fileRef = C53BAF1F1C9A763500640CF8 /* NeuralView.m */; };
+		C543BF961C9D141600103CC2 /* MMSidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = C543BF951C9D141600103CC2 /* MMSidebarView.m */; };
 		C5CEDC0D1C97C9E100467231 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEDC0C1C97C9E100467231 /* main.m */; };
 		C5CEDC101C97C9E100467231 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEDC0F1C97C9E100467231 /* AppDelegate.m */; };
 		C5CEDC131C97C9E100467231 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEDC121C97C9E100467231 /* ViewController.m */; };
@@ -26,6 +27,9 @@
 		C50635AF1C9BD4A100545AB0 /* MMVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMVector.m; sourceTree = "<group>"; };
 		C53BAF1E1C9A763500640CF8 /* NeuralView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeuralView.h; sourceTree = "<group>"; };
 		C53BAF1F1C9A763500640CF8 /* NeuralView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeuralView.m; sourceTree = "<group>"; };
+		C543BF941C9D141600103CC2 /* MMSidebarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSidebarView.h; sourceTree = "<group>"; };
+		C543BF951C9D141600103CC2 /* MMSidebarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSidebarView.m; sourceTree = "<group>"; };
+		C543BF971C9D145A00103CC2 /* MMSidebarViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSidebarViewDelegate.h; sourceTree = "<group>"; };
 		C5CEDC081C97C9E100467231 /* BrainTrain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrainTrain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5CEDC0C1C97C9E100467231 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C5CEDC0E1C97C9E100467231 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +55,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C543BF931C9D13EB00103CC2 /* sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				C543BF941C9D141600103CC2 /* MMSidebarView.h */,
+				C543BF951C9D141600103CC2 /* MMSidebarView.m */,
+				C543BF971C9D145A00103CC2 /* MMSidebarViewDelegate.h */,
+			);
+			name = sidebar;
+			sourceTree = "<group>";
+		};
 		C5CEDBFF1C97C9E100467231 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +85,7 @@
 		C5CEDC0A1C97C9E100467231 /* BrainTrain */ = {
 			isa = PBXGroup;
 			children = (
+				C543BF931C9D13EB00103CC2 /* sidebar */,
 				C50635AE1C9BD4A100545AB0 /* MMVector.h */,
 				C50635AF1C9BD4A100545AB0 /* MMVector.m */,
 				C50635AB1C9BD1DE00545AB0 /* InstantPanGestureRecognizer.h */,
@@ -180,6 +195,7 @@
 				C5CEDC131C97C9E100467231 /* ViewController.m in Sources */,
 				C50635B01C9BD4A100545AB0 /* MMVector.m in Sources */,
 				C53BAF201C9A763500640CF8 /* NeuralView.m in Sources */,
+				C543BF961C9D141600103CC2 /* MMSidebarView.m in Sources */,
 				C5CEDC101C97C9E100467231 /* AppDelegate.m in Sources */,
 				C5CEDC0D1C97C9E100467231 /* main.m in Sources */,
 			);

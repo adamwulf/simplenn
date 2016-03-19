@@ -14,4 +14,6 @@
 
 -(void) addNeuron:(Neuron*)neuron;
 
+-(void) resetRandomWeight;
+
 @end

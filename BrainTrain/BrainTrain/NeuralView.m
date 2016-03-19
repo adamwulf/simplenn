@@ -38,14 +38,6 @@
 
     self.clearsContextBeforeDrawing = YES;
 
-
-    UIButton* randomWeightButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [randomWeightButton setTitle:@"reset random weight" forState:UIControlStateNormal];
-    [randomWeightButton addTarget:self action:@selector(resetRandomWeight) forControlEvents:UIControlEventTouchUpInside];
-    [randomWeightButton sizeToFit];
-    [self addSubview:randomWeightButton];
-    [randomWeightButton setCenter:CGPointMake(100, 40)];
-
     InstantPanGestureRecognizer* pan = [[InstantPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
     [self addGestureRecognizer:pan];
 }
@@ -53,7 +45,7 @@
 -(void) panGesture:(InstantPanGestureRecognizer*)gesture{
     if(gesture.state == UIGestureRecognizerStateBegan){
         heldNeuronIndex = NSIntegerMax;
-        CGFloat minDist = CGFLOAT_MAX;
+        CGFloat minDist = 100;
         CGPoint startLoc = [gesture locationInView:self];
         for (int i=0; i<[neurons count]; i++) {
             CGFloat dist = [NeuralView distance:[positions[i] CGPointValue] and:startLoc];
