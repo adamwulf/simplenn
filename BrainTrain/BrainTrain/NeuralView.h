@@ -34,4 +34,6 @@ typedef enum NSInteger{
 
 -(void) loadDictionary:(NSDictionary*)data;
 
+-(void) clearWeight;
+
 @end

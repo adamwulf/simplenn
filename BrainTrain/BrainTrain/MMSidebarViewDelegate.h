@@ -18,4 +18,6 @@
 
 -(void) load;
 
+-(void) clearWeight;
+
 @end

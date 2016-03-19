@@ -52,6 +52,13 @@
     [self addSubview:loadButton];
     [loadButton setCenter:CGPointMake(self.bounds.size.width / 2, 240)];
 
+
+    UIButton* clearWeightButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [clearWeightButton setTitle:@"Clear weight" forState:UIControlStateNormal];
+    [clearWeightButton addTarget:self action:@selector(clearWeight) forControlEvents:UIControlEventTouchUpInside];
+    [clearWeightButton sizeToFit];
+    [self addSubview:clearWeightButton];
+    [clearWeightButton setCenter:CGPointMake(self.bounds.size.width / 2, 340)];
 }
 
 #pragma mark - Actions
@@ -72,6 +79,10 @@
 
 -(void) load{
     [self.delegate load];
+}
+
+-(void) clearWeight{
+    [self.delegate clearWeight];
 }
 
 @end

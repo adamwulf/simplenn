@@ -161,6 +161,12 @@
     NSAssert(neurons && positions, @"data loaded ok");
 }
 
+-(void) clearWeight{
+    if(weightBetween1 && weightBetween2){
+        [weightBetween1 updateWeight:0 forInputNeuron:weightBetween2];
+    }
+}
+
 #pragma mark - Rendering
 
 

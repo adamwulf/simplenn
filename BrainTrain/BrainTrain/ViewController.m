@@ -238,6 +238,10 @@
     }
 }
 
+-(void) clearWeight{
+    [neuralView clearWeight];
+}
+
 
 static NSArray* userDocumentsPaths;
 +(NSString*) documentsPath{
