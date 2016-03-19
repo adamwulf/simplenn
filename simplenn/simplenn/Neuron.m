@@ -48,6 +48,10 @@
     return inputNeurons;
 }
 
+-(NSArray*) outputs{
+    return outputNeurons;
+}
+
 -(void) addInput:(Neuron*)neuron{
     [self addInput:neuron withWeight:.5];
 }

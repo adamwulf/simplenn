@@ -17,7 +17,9 @@
     NSInteger heldNeuronIndex;
 }
 
+@synthesize inputs;
 @synthesize neurons;
+@synthesize outputs;
 
 -(instancetype) initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
@@ -34,6 +36,8 @@
 }
 
 -(void) initCommon{
+    inputs = @[];
+    outputs = @[];
     neurons = @[];
     positions = @[];
 
@@ -102,10 +106,16 @@
 
 #pragma mark - Public Methods
 
--(void) addNeuron:(Neuron*)neuron{
+-(void) addNeuron:(Neuron*)neuron type:(NeuronType)type{
     neurons = [neurons arrayByAddingObject:neuron];
     CGPoint location = CGPointMake(rand() % (int)self.bounds.size.width, rand() % (int)self.bounds.size.width);
     positions = [positions arrayByAddingObject:[NSValue valueWithCGPoint:location]];
+
+    if(type == NeuronInput){
+        inputs = [inputs arrayByAddingObject:neuron];
+    }else if(type == NeuronOutput){
+        outputs = [outputs arrayByAddingObject:neuron];
+    }
 }
 
 -(void) resetRandomWeight{
@@ -119,11 +129,13 @@
 }
 
 -(NSDictionary*) asDictionary{
-    return @{ @"neurons" : neurons, @"positions" : positions};
+    return @{ @"inputs" : inputs, @"neurons" : neurons, @"outputs" : outputs, @"positions" : positions};
 }
 
 -(void) loadDictionary:(NSDictionary*)data{
+    inputs = data[@"inputs"];
     neurons = data[@"neurons"];
+    outputs = data[@"outputs"];
     positions = data[@"positions"];
 
     NSAssert(neurons && positions, @"data loaded ok");

@@ -15,6 +15,7 @@
 @property (nonatomic, readonly) CGFloat deltaNode;
 @property (nonatomic, readonly) NSString* name;
 @property (nonatomic, readonly) NSArray* inputs;
+@property (nonatomic, readonly) NSArray* outputs;
 
 -(instancetype) init NS_UNAVAILABLE;
 

@@ -9,12 +9,19 @@
 #import <UIKit/UIKit.h>
 #import <simplenn/simplenn.h>
 
+typedef enum NSInteger{
+    NeuronInput,
+    NeuronOutput,
+    NeuronHidden
+} NeuronType;
 
 @interface NeuralView : UIView
 
+@property (nonatomic, readonly) NSArray* inputs;
 @property (nonatomic, readonly) NSArray* neurons;
+@property (nonatomic, readonly) NSArray* outputs;
 
--(void) addNeuron:(Neuron*)neuron;
+-(void) addNeuron:(Neuron*)neuron type:(NeuronType)type;
 
 -(void) resetRandomWeight;
 
