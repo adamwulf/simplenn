@@ -23,4 +23,18 @@
     return value;
 }
 
+#pragma mark - NSCoding
+
+-(instancetype) initWithCoder:(NSCoder *)aDecoder{
+    if(self = [super initWithCoder:aDecoder]){
+        value = [aDecoder decodeFloatForKey:@"value"];
+    }
+    return self;
+}
+
+-(void) encodeWithCoder:(NSCoder *)aCoder{
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeFloat:value forKey:@"value"];
+}
+
 @end

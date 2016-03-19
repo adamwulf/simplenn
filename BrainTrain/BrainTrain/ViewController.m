@@ -113,7 +113,6 @@
                 Neuron* neuron = [nextNeuronsToPass firstObject];
                 [nextNeuronsToPass removeObjectAtIndex:0];
 
-
                 [neuron forwardPass];
 
                 NSMutableSet* nextNeurons = [allNeurons mutableCopy];
@@ -158,7 +157,6 @@
             while([nextNeuronsToPass count]) {
                 Neuron* neuron = [nextNeuronsToPass firstObject];
                 [nextNeuronsToPass removeObjectAtIndex:0];
-
 
                 if(neuron == neuralView.outputs[0]){
                     [neuron backpropGivenOutput:o1Target];
@@ -223,6 +221,7 @@
 }
 
 -(void) save{
+    NSLog(@"saving to: %@", [self filename]);
     NSDictionary* data;
     @synchronized(self) {
         data = [neuralView asDictionary];
