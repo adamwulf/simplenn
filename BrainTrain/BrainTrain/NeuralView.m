@@ -40,6 +40,34 @@
 
     InstantPanGestureRecognizer* pan = [[InstantPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
     [self addGestureRecognizer:pan];
+
+    UITapGestureRecognizer* selectItemGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+    [self addGestureRecognizer:selectItemGesture];
+}
+
+#pragma mark - Gestures
+
+-(void) tapGesture:(UITapGestureRecognizer*)tapGesture{
+    for (int i=0; i<[neurons count]; i++) {
+        if([NeuralView distance:[positions[i] CGPointValue] and:[tapGesture locationInView:self]] < 20){
+            NSLog(@"tapped %@", neurons[i]);
+            return;
+        }
+    }
+
+    __block CGFloat minDist = 10;
+    __block Neuron* mainNeuron;
+    __block Neuron* inputNeuron;
+    [self enumerateWeights:^(Neuron *n1, Neuron *n2, CGFloat w) {
+        CGFloat dist = [self distanceFromPoint:[tapGesture locationInView:self] between:[self locationForNeuron:n1] and:[self locationForNeuron:n2]];
+        if(dist < minDist){
+            minDist = dist;
+            mainNeuron = n1;
+            inputNeuron = n2;
+        }
+    }];
+
+    NSLog(@"tapped weight between %@ and %@", mainNeuron, inputNeuron);
 }
 
 -(void) panGesture:(InstantPanGestureRecognizer*)gesture{
@@ -71,29 +99,33 @@
     [self setNeedsDisplay];
 }
 
+#pragma mark - Public Methods
+
 -(void) addNeuron:(Neuron*)neuron{
     neurons = [neurons arrayByAddingObject:neuron];
     CGPoint location = CGPointMake(rand() % (int)self.bounds.size.width, rand() % (int)self.bounds.size.width);
     positions = [positions arrayByAddingObject:[NSValue valueWithCGPoint:location]];
 }
 
--(CGPoint) locationForNeuron:(Neuron*)neuron{
-    for (int i=0; i<[neurons count]; i++) {
-        if(neurons[i] == neuron){
-            return [positions[i] CGPointValue];
-        }
+-(void) resetRandomWeight{
+    int foo = rand() % [neurons count];
+
+    Neuron* neuronToReset = neurons[foo];
+    if([neuronToReset.inputs count]){
+        int foo2 = rand() % (int)[[neurons[foo] inputs] count];
+        [neuronToReset updateWeight:(rand() % 100) / 1000.0 forInputNeuron:neuronToReset.inputs[foo2]];
     }
-    return CGPointZero;
 }
+
+#pragma mark - Rendering
+
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
 
-    for (int i=0; i<[neurons count]; i++) {
-        Neuron* neuron = neurons[i];
-        CGPoint loc = [positions[i] CGPointValue];
+    [self enumerateNeurons:^(Neuron *neuron, CGPoint loc) {
 
         CGFloat radius = 20;
 
@@ -108,25 +140,71 @@
 
 
         for (Neuron* input in neuron.inputs) {
-            loc = [positions[i] CGPointValue];
             CGPoint loc2 = [self locationForNeuron:input];
             MMVector* vec = [MMVector vectorWithPoint:loc andPoint:loc2];
             vec = [vec normal];
 
-            loc = [vec pointFromPoint:loc distance:radius];
+            CGPoint adjustedLoc = [vec pointFromPoint:loc distance:radius];
             loc2 = [vec pointFromPoint:loc2 distance:-radius];
 
             CGFloat weight = [neuron weightForInputNeuron:input];
             UIBezierPath* line = [UIBezierPath bezierPath];
-            [line moveToPoint:loc];
+            [line moveToPoint:adjustedLoc];
             [line addLineToPoint:loc2];
             line.lineWidth = ABS(weight * 5);
             [line stroke];
         }
-    }
+    }];
+
 }
 
 
+#pragma mark - Neural Net Helpers
+
+// will iterate over every weight
+-(void) enumerateWeights:(void(^)(Neuron* n1, Neuron* n2, CGFloat w))iterationBlock{
+    for (Neuron* n1 in neurons) {
+        for (Neuron* n2 in n1.inputs) {
+            iterationBlock(n1, n2, [n1 weightForInputNeuron:n2]);
+        }
+    }
+}
+
+// will iterate over every weight
+-(void) enumerateNeurons:(void(^)(Neuron* neuron, CGPoint loc))iterationBlock{
+    for (int i=0; i<[neurons count]; i++) {
+        iterationBlock(neurons[i], [positions[i] CGPointValue]);
+    }
+}
+
+-(CGPoint) locationForNeuron:(Neuron*)neuron{
+    for (int i=0; i<[neurons count]; i++) {
+        if(neurons[i] == neuron){
+            return [positions[i] CGPointValue];
+        }
+    }
+    return CGPointZero;
+}
+
+#pragma mark - Geometry Helpers
+
+// return the distance from the input point
+// to this line segment of p0 -> p1
+-(CGFloat) distanceFromPoint:(CGPoint)point between:(CGPoint)p0 and:(CGPoint)p1{
+    CGPoint pointOnLine = NearestPointOnLine(point, p0, p1);
+
+    if((p0.x <= pointOnLine.x && pointOnLine.x <= p1.x) ||
+       (p0.x >= pointOnLine.x && pointOnLine.x >= p1.x)){
+        // it's X coordinate is between p0 and p1
+        if((p0.y <= pointOnLine.y && pointOnLine.y <= p1.y) ||
+           (p0.y >= pointOnLine.y && pointOnLine.y >= p1.y)){
+            // it's Y coordinates are also between p0 and p1
+            return [NeuralView distance:point and:pointOnLine];
+        }
+    }
+    // found a point outside the line segment
+    return MIN([NeuralView distance:point and:p0], [NeuralView distance:point and:p1]);
+}
 
 +(CGFloat) distance:(CGPoint)p0 and:(CGPoint)p1{
     CGFloat dx = p1.x - p0.x,
@@ -134,14 +212,40 @@
     return sqrtf(dx * dx + dy * dy);
 }
 
--(void) resetRandomWeight{
-    int foo = rand() % [neurons count];
 
-    Neuron* neuronToReset = neurons[foo];
-    if([neuronToReset.inputs count]){
-        int foo2 = rand() % (int)[[neurons[foo] inputs] count];
-        [neuronToReset updateWeight:(rand() % 100) / 1000.0 forInputNeuron:neuronToReset.inputs[foo2]];
+
+
+/// return the distance of <inPoint> from a line segment drawn from a to b.
+
+CGPoint		NearestPointOnLine( const CGPoint inPoint, const CGPoint a, const CGPoint b )
+{
+    CGFloat mag = hypotf(( b.x - a.x ), ( b.y - a.y ));
+
+    if( mag > 0.0 )
+    {
+        CGFloat u = ((( inPoint.x - a.x ) * ( b.x - a.x )) + (( inPoint.y - a.y ) * ( b.y - a.y ))) / ( mag * mag );
+
+        if( u <= 0.0 )
+            return a;
+        else if ( u >= 1.0 )
+            return b;
+        else
+        {
+            CGPoint cp;
+
+            cp.x = a.x + u * ( b.x - a.x );
+            cp.y = a.y + u * ( b.y - a.y );
+
+            return cp;
+        }
     }
+    else
+        return a;
 }
+
+
+
+
+
 
 @end

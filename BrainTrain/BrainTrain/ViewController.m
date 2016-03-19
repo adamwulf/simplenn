@@ -114,11 +114,11 @@
             [o1 forwardPass];
             [o2 forwardPass];
 
-            if(i%10000 == 0){
-                NSLog(@"run %ld", i + 1);
-                NSLog(@"  o1: %f", [o1 latestOutput]);
-                NSLog(@"  o2: %f", [o2 latestOutput]);
-            }
+//            if(i%10000 == 0){
+//                NSLog(@"run %ld", i + 1);
+//                NSLog(@"  o1: %f", [o1 latestOutput]);
+//                NSLog(@"  o2: %f", [o2 latestOutput]);
+//            }
 
             CGFloat e1 = [o1 errorGivenTarget:o1Target];
             CGFloat e2 = [o2 errorGivenTarget:o2Target];
