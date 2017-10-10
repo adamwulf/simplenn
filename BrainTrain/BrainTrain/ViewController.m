@@ -128,14 +128,14 @@
                 NSLog(@"  o2: %f", [neuralView.outputs[1] latestOutput]);
             }
 
-            CGFloat e1 = [neuralView.outputs[0] errorGivenTarget:o1Target];
-            CGFloat e2 = [neuralView.outputs[1] errorGivenTarget:o2Target];
-
+//            CGFloat e1 = [neuralView.outputs[0] errorGivenTarget:o1Target];
+//            CGFloat e2 = [neuralView.outputs[1] errorGivenTarget:o2Target];
+//
 //            NSLog(@"  e1: %f", e1);
 //            NSLog(@"  e2: %f", e2);
 
-            CGFloat errorTotal = e1 + e2;
-
+//            CGFloat errorTotal = e1 + e2;
+//
 //            if(i%100 == 0){
 //                NSLog(@"  e total: %f", errorTotal);
 //            }
