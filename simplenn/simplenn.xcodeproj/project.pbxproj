@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C5A3E1321F9019D600478767 /* simplennTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5A3E1311F9019D600478767 /* simplennTests.m */; };
+		C5A3E1341F9019D600478767 /* simplenn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5CEDC4B1C97CB0E00467231 /* simplenn.framework */; };
 		C5CEDC4F1C97CB0E00467231 /* simplenn.h in Headers */ = {isa = PBXBuildFile; fileRef = C5CEDC4E1C97CB0E00467231 /* simplenn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5CEDC581C97CB2F00467231 /* Neuron.h in Headers */ = {isa = PBXBuildFile; fileRef = C5CEDC561C97CB2F00467231 /* Neuron.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5CEDC591C97CB2F00467231 /* Neuron.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEDC571C97CB2F00467231 /* Neuron.m */; };
@@ -14,7 +16,20 @@
 		C5CEDC5E1C97CCAD00467231 /* StaticNeuron.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEDC5C1C97CCAD00467231 /* StaticNeuron.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C5A3E1351F9019D600478767 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5CEDC421C97CB0E00467231 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C5CEDC4A1C97CB0E00467231;
+			remoteInfo = simplenn;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		C5A3E12F1F9019D600478767 /* simplennTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = simplennTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5A3E1311F9019D600478767 /* simplennTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = simplennTests.m; sourceTree = "<group>"; };
+		C5A3E1331F9019D600478767 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5CEDC4B1C97CB0E00467231 /* simplenn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = simplenn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5CEDC4E1C97CB0E00467231 /* simplenn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = simplenn.h; sourceTree = "<group>"; };
 		C5CEDC501C97CB0E00467231 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -25,6 +40,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C5A3E12C1F9019D600478767 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5A3E1341F9019D600478767 /* simplenn.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5CEDC471C97CB0E00467231 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -35,10 +58,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C5A3E1301F9019D600478767 /* simplennTests */ = {
+			isa = PBXGroup;
+			children = (
+				C5A3E1311F9019D600478767 /* simplennTests.m */,
+				C5A3E1331F9019D600478767 /* Info.plist */,
+			);
+			path = simplennTests;
+			sourceTree = "<group>";
+		};
 		C5CEDC411C97CB0E00467231 = {
 			isa = PBXGroup;
 			children = (
 				C5CEDC4D1C97CB0E00467231 /* simplenn */,
+				C5A3E1301F9019D600478767 /* simplennTests */,
 				C5CEDC4C1C97CB0E00467231 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				C5CEDC4B1C97CB0E00467231 /* simplenn.framework */,
+				C5A3E12F1F9019D600478767 /* simplennTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,6 +122,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		C5A3E12E1F9019D600478767 /* simplennTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C5A3E1391F9019D600478767 /* Build configuration list for PBXNativeTarget "simplennTests" */;
+			buildPhases = (
+				C5A3E12B1F9019D600478767 /* Sources */,
+				C5A3E12C1F9019D600478767 /* Frameworks */,
+				C5A3E12D1F9019D600478767 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C5A3E1361F9019D600478767 /* PBXTargetDependency */,
+			);
+			name = simplennTests;
+			productName = simplennTests;
+			productReference = C5A3E12F1F9019D600478767 /* simplennTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C5CEDC4A1C97CB0E00467231 /* simplenn */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C5CEDC531C97CB0E00467231 /* Build configuration list for PBXNativeTarget "simplenn" */;
@@ -115,6 +167,11 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Milestone Made";
 				TargetAttributes = {
+					C5A3E12E1F9019D600478767 = {
+						CreatedOnToolsVersion = 9.0;
+						DevelopmentTeam = MU27A4SCKC;
+						ProvisioningStyle = Automatic;
+					};
 					C5CEDC4A1C97CB0E00467231 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
@@ -133,11 +190,19 @@
 			projectRoot = "";
 			targets = (
 				C5CEDC4A1C97CB0E00467231 /* simplenn */,
+				C5A3E12E1F9019D600478767 /* simplennTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C5A3E12D1F9019D600478767 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5CEDC491C97CB0E00467231 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -148,6 +213,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C5A3E12B1F9019D600478767 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5A3E1321F9019D600478767 /* simplennTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5CEDC461C97CB0E00467231 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -159,7 +232,73 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C5A3E1361F9019D600478767 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C5CEDC4A1C97CB0E00467231 /* simplenn */;
+			targetProxy = C5A3E1351F9019D600478767 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		C5A3E1371F9019D600478767 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MU27A4SCKC;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = simplennTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.milestonemade.simplennTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C5A3E1381F9019D600478767 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MU27A4SCKC;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = simplennTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.milestonemade.simplennTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		C5CEDC511C97CB0E00467231 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -301,6 +440,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C5A3E1391F9019D600478767 /* Build configuration list for PBXNativeTarget "simplennTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C5A3E1371F9019D600478767 /* Debug */,
+				C5A3E1381F9019D600478767 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C5CEDC451C97CB0E00467231 /* Build configuration list for PBXProject "simplenn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

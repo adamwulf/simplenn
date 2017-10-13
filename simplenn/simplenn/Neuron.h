@@ -35,7 +35,7 @@
 
 -(CGFloat) errorGivenTarget:(CGFloat)targetVal;
 
--(void) backprop;
--(void) backpropGivenOutput:(CGFloat)targetVal;
+-(CGFloat) backprop;
+-(CGFloat) backpropGivenOutput:(CGFloat)targetVal;
 
 @end

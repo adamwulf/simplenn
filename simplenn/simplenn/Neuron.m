@@ -19,7 +19,7 @@
 }
 
 +(CGFloat) learningRate{
-    return .5;
+    return .01;
 }
 
 // name of this neuron for debugging
@@ -97,7 +97,7 @@
 // process the back propagation. The output
 // neurons will need to use backpropGivenOutput:
 // to begin the training.
--(void) backprop{
+-(CGFloat) backprop{
     if(![oldWeights count]){
         oldWeights = [weights copy];
     }
@@ -111,12 +111,16 @@
         dErrTotaldOut += dErrOutdOut;
     }
     [self backpropGivendErrTotaldOut:dErrTotaldOut];
+    
+    return dErrTotaldOut;
 }
 
--(void) backpropGivenOutput:(CGFloat)targetVal{
+-(CGFloat) backpropGivenOutput:(CGFloat)targetVal{
     CGFloat dErrTotaldOut = ([self latestOutput] - targetVal);
 
     [self backpropGivendErrTotaldOut:dErrTotaldOut];
+    
+    return dErrTotaldOut;
 }
 
 #pragma mark - Private Forward and Backward Propagation
@@ -125,13 +129,13 @@
     CGFloat dOutdNet = [self latestOutput] * (1 - [self latestOutput]);
 
     deltaNode = dTotaldOut * dOutdNet;
-
+    
     NSArray* updatedWeights = @[];
 
     for (int i=0; i<[weights count]; i++) {
-        CGFloat dNetdInput = [inputLatestValues[i] floatValue];
+        CGFloat dNetdInput = [inputLatestValues[i] doubleValue];
         CGFloat dTotaldinput = deltaNode * dNetdInput;
-        CGFloat weight = [weights[i] floatValue];
+        CGFloat weight = [weights[i] doubleValue];
 
         updatedWeights = [updatedWeights arrayByAddingObject:@(weight - [Neuron learningRate] * dTotaldinput)];
     }
@@ -145,7 +149,7 @@
     CGFloat sum = 0;
     inputLatestValues = @[];
     for (int i=0; i<[weights count]; i++) {
-        CGFloat weight = [weights[i] floatValue];
+        CGFloat weight = [weights[i] doubleValue];
         Neuron* input = inputNeurons[i];
         CGFloat inputValue = [input latestOutput];
         sum += weight * inputValue;
@@ -169,7 +173,7 @@
 }
 
 -(CGFloat) weightForInputNeuron:(Neuron*)neuron givenWeights:(NSArray*)givenWeights{
-    return [[givenWeights objectAtIndex:[inputNeurons indexOfObject:neuron]] floatValue];
+    return [[givenWeights objectAtIndex:[inputNeurons indexOfObject:neuron]] doubleValue];
 }
 
 -(NSString*) description{
